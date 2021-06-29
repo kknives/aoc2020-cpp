@@ -1,7 +1,9 @@
 #include <fmt/core.h>
 #include <iostream>
 #include <map>
-#include <range/v3/all.hpp>
+#include <range/v3/algorithm/count_if.hpp>
+#include <range/v3/view/enumerate.hpp>
+#include <range/v3/view/split.hpp>
 #include <set>
 #include <string>
 #include <string_view>

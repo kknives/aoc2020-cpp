@@ -34,3 +34,4 @@
 build/*
 build-clang/*
 subprojects/*
+!subprojects/range-v3.wrap

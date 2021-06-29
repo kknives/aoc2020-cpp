@@ -8,8 +8,8 @@ unique_answers(Answers& ans, const std::string_view grp_ans) -> Answers::size_ty
 {
   using namespace ranges;
 
-  for (auto&& [i, str_v] : grp_ans | views::split('\n') | views::enumerate) {
-    for ( char x : str_v) {
+  for (const auto& str_v : grp_ans | views::split('\n')) {
+    for (char x : str_v) {
       ans.insert(x);
     }
   };
@@ -56,8 +56,10 @@ main()
   std::string grp_ans;
   while (std::cin >> grp_ans) {
     // fmt::print("dbg: parsed {}\n", grp_ans);
-    uniques += unique_answers(unique, grp_ans);
-    commons += common_answers(common, grp_ans);
+    std::string_view group_answers_view{grp_ans};
+    uniques += unique_answers(unique, group_answers_view);
+    commons += common_answers(common, group_answers_view);
+
     unique.clear();
     common.clear();
     grp_ans.clear();

@@ -33,10 +33,11 @@ int main() {
   auto sum = 0;
 
   std::string grp_ans;
-  while( std::cin >> grp_ans) {
+  while(std::cin >> grp_ans) {
     fmt::print("dbg: parsed {}\n", grp_ans);
     sum += test_grp.init(unique, grp_ans);
     unique.clear();
+    grp_ans.clear();
   }
   fmt::print("The answer is: {}\n", sum);
 

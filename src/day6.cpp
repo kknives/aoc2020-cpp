@@ -1,5 +1,5 @@
 #include "day6.h"
-#include <cstdio>
+#include <iostream>
 #include <range/v3/all.hpp>
 #include <fmt/core.h>
 
@@ -18,8 +18,26 @@ auto Group::init(Answers &ans, std::string grp_ans) -> Answers::size_type {
   return ans.size();
 }
 
+std::istream& operator>> (std::istream& is, std::string& op) {
+  std::string line;
+  while( std::getline(is, line) && !line.empty()) {
+    op.append(line);
+  }
+  return is;
+}
+
+
 int main() {
   Group test_grp = Group{};
-  auto q = test_grp.init("a\nb\nc\n");
-  printf("result : %ld\n", q);
+  Answers unique{};
+  auto sum = 0;
+
+  std::string grp_ans;
+  while( std::cin >> grp_ans) {
+    fmt::print("dbg: parsed {}\n", grp_ans);
+    sum += test_grp.init(unique, grp_ans);
+    unique.clear();
+  }
+  fmt::print("The answer is: {}\n", sum);
+
 }

@@ -8,20 +8,19 @@ Group::Group() : uniq_ques{ } {};
 auto Group::init(Answers &ans, std::string grp_ans) -> Answers::size_type {
   using namespace ranges;
 
-  auto insert_into = [&ans](auto const& str_v) mutable {
+  for (auto&& [i, str_v] : grp_ans | views::split('\n') | views::enumerate) {
+    fmt::print("Line {}\n", i);
     for ( char x : str_v) {
       ans.insert(x);
     }
   };
-
-  for_each(grp_ans | views::split('\n'), insert_into);
   return ans.size();
 }
 
 std::istream& operator>> (std::istream& is, std::string& op) {
   std::string line;
   while( std::getline(is, line) && !line.empty()) {
-    op.append(line);
+    op.append(line+'\n');
   }
   return is;
 }

@@ -7,7 +7,6 @@ auto unique_answers(Answers &ans, std::string grp_ans) -> Answers::size_type {
   using namespace ranges;
 
   for (auto&& [i, str_v] : grp_ans | views::split('\n') | views::enumerate) {
-    fmt::print("Line {}\n", i);
     for ( char x : str_v) {
       ans.insert(x);
     }

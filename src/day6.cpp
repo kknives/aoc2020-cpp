@@ -1,26 +1,21 @@
 #include "day6.h"
 #include <cstdio>
 #include <range/v3/all.hpp>
+#include <fmt/core.h>
 
 Group::Group() : uniq_ques{ } {};
 
-auto Group::init(std::string grp_ans) -> size_t {
+auto Group::init(Answers &ans, std::string grp_ans) -> Answers::size_type {
   using namespace ranges;
 
-  auto are = [](char look_for) {
-    return [look_for](char candidate) { return candidate == look_for; };
-  };
-  auto insert_if = [this, are](char x) {
-    if (none_of(uniq_ques, are(x))) {
-      uniq_ques.push_back(x);
-      printf("dbg: %d\n", x);
+  auto insert_into = [&ans](auto const& str_v) mutable {
+    for ( char x : str_v) {
+      ans.insert(x);
     }
   };
 
-  grp_ans.erase(ranges::remove(grp_ans, '\n'));
-  for_each(grp_ans, insert_if);
-
-  return uniq_ques.size();
+  for_each(grp_ans | views::split('\n'), insert_into);
+  return ans.size();
 }
 
 int main() {

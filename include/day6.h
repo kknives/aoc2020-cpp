@@ -4,12 +4,10 @@
 #include <string>
 #include <string_view>
 #include <set>
+#include <map>
 
 typedef std::set<char> Answers;
+typedef std::map<char, int> AnsMap;
 
-class Group {
-  std::vector<char> uniq_ques;
-  public:
-  Group();
-  auto init(Answers &ans, std::string) -> Answers::size_type;
-};
+auto unique_answers(Answers &ans, std::string grp_ans) -> Answers::size_type;
+auto common_answers(AnsMap &ans, std::string grp_ans) -> AnsMap::size_type;

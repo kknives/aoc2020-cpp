@@ -3,9 +3,7 @@
 #include <range/v3/all.hpp>
 #include <fmt/core.h>
 
-Group::Group() : uniq_ques{ } {};
-
-auto Group::init(Answers &ans, std::string grp_ans) -> Answers::size_type {
+auto unique_answers(Answers &ans, std::string grp_ans) -> Answers::size_type {
   using namespace ranges;
 
   for (auto&& [i, str_v] : grp_ans | views::split('\n') | views::enumerate) {
@@ -27,14 +25,13 @@ std::istream& operator>> (std::istream& is, std::string& op) {
 
 
 int main() {
-  Group test_grp = Group{};
   Answers unique{};
   auto sum = 0;
 
   std::string grp_ans;
   while(std::cin >> grp_ans) {
-    fmt::print("dbg: parsed {}\n", grp_ans);
-    sum += test_grp.init(unique, grp_ans);
+    // fmt::print("dbg: parsed {}\n", grp_ans);
+    sum += unique_answers(unique, grp_ans);
     unique.clear();
     grp_ans.clear();
   }

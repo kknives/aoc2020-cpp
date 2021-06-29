@@ -1,10 +1,17 @@
-#include "day6.h"
 #include <fmt/core.h>
 #include <iostream>
+#include <map>
 #include <range/v3/all.hpp>
+#include <set>
+#include <string>
+#include <string_view>
+
+typedef std::set<char> Answers;
+typedef std::map<char, int> AnsMap;
 
 auto
-unique_answers(Answers& ans, const std::string_view grp_ans) -> Answers::size_type
+unique_answers(Answers& ans, const std::string_view grp_ans)
+  -> Answers::size_type
 {
   using namespace ranges;
 
@@ -56,7 +63,7 @@ main()
   std::string grp_ans;
   while (std::cin >> grp_ans) {
     // fmt::print("dbg: parsed {}\n", grp_ans);
-    std::string_view group_answers_view{grp_ans};
+    std::string_view group_answers_view{ grp_ans };
     uniques += unique_answers(unique, group_answers_view);
     commons += common_answers(common, group_answers_view);
 

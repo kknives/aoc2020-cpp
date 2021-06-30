@@ -1,13 +1,8 @@
 #include <fmt/core.h>
 #include <iostream>
-#include <map>
 #include <range/v3/action/insert.hpp>
 #include <range/v3/algorithm/count.hpp>
 #include <range/v3/algorithm/count_if.hpp>
-#include <range/v3/view/enumerate.hpp>
-#include <range/v3/view/join.hpp>
-#include <range/v3/view/map.hpp>
-#include <range/v3/view/split.hpp>
 #include <set>
 #include <string>
 #include <string_view>
@@ -16,7 +11,6 @@
 // #include <range/v3/all.hpp>
 
 typedef std::set<char> Answers;
-typedef std::map<char, int> AnsMap;
 
 auto
 unique_answers(Answers& ans, const std::string_view grp_ans)

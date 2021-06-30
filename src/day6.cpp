@@ -24,7 +24,7 @@ unique_answers(Answers& ans, const std::string_view grp_ans)
 {
   using namespace ranges;
 
-  actions::insert(ans, grp_ans | views::split('\n') | views::join);
+  actions::insert(ans, grp_ans);
   return ans.size();
 }
 

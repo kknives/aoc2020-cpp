@@ -1,8 +1,10 @@
 #include <fmt/core.h>
 #include <iostream>
 #include <map>
+#include <range/v3/action/insert.hpp>
 #include <range/v3/algorithm/count.hpp>
 #include <range/v3/view/enumerate.hpp>
+#include <range/v3/view/join.hpp>
 #include <range/v3/view/map.hpp>
 #include <range/v3/view/split.hpp>
 #include <set>
@@ -21,11 +23,7 @@ unique_answers(Answers& ans, const std::string_view grp_ans)
 {
   using namespace ranges;
 
-  for (const auto& str_v : grp_ans | views::split('\n')) {
-    for (char x : str_v) {
-      ans.insert(x);
-    }
-  };
+  actions::insert(ans, grp_ans | views::split('\n') | views::join);
   return ans.size();
 }
 

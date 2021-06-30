@@ -21,7 +21,7 @@ unique_answers(Answers& ans, const std::string_view grp_ans)
 }
 
 auto
-common_answers(int member_count, const std::string_view grp_ans) -> int
+common_answers(const int member_count, const std::string_view grp_ans) -> int
 {
   using namespace ranges;
 

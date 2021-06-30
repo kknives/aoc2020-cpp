@@ -3,6 +3,7 @@
 #include <map>
 #include <range/v3/action/insert.hpp>
 #include <range/v3/algorithm/count.hpp>
+#include <range/v3/algorithm/count_if.hpp>
 #include <range/v3/view/enumerate.hpp>
 #include <range/v3/view/join.hpp>
 #include <range/v3/view/map.hpp>
@@ -32,14 +33,11 @@ common_answers(AnsMap& ans, const std::string_view grp_ans) -> AnsMap::size_type
 {
   using namespace ranges;
 
-  int member_count;
-  for (auto&& [i, str_v] : grp_ans | views::split('\n') | views::enumerate) {
-    for (char x : str_v) {
-      ans[x]++;
-    }
-    member_count = i + 1; // Number not index
-  };
-  return count(ans | views::values, member_count);
+  auto freq = count_if(grp_ans, [member_count, &grp_ans](char x) {
+    return count(grp_ans, x) == member_count;
+  });
+  // Remove duplicates and don't count newlines
+  return (freq / member_count);
 }
 
 std::istream&

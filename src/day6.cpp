@@ -22,9 +22,7 @@ auto
 unique_answers(Answers& ans, const std::string_view grp_ans)
   -> Answers::size_type
 {
-  using namespace ranges;
-
-  actions::insert(ans, grp_ans);
+  ranges::actions::insert(ans, grp_ans);
   return ans.size();
 }
 

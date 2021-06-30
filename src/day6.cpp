@@ -1,12 +1,16 @@
 #include <fmt/core.h>
 #include <iostream>
 #include <map>
-#include <range/v3/algorithm/count_if.hpp>
+#include <range/v3/algorithm/count.hpp>
 #include <range/v3/view/enumerate.hpp>
+#include <range/v3/view/map.hpp>
 #include <range/v3/view/split.hpp>
 #include <set>
 #include <string>
 #include <string_view>
+
+// This is useful when just trying things out
+// #include <range/v3/all.hpp>
 
 typedef std::set<char> Answers;
 typedef std::map<char, int> AnsMap;
@@ -37,10 +41,7 @@ common_answers(AnsMap& ans, const std::string_view grp_ans) -> AnsMap::size_type
     }
     member_count = i + 1; // Number not index
   };
-  return count_if(ans, [member_count](auto const& pair) {
-    const auto& [key, count] = pair;
-    return count == member_count;
-  });
+  return count(ans | views::values, member_count);
 }
 
 std::istream&

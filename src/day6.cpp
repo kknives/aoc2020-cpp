@@ -36,7 +36,7 @@ common_answers(int member_count, const std::string_view grp_ans) -> int
   auto freq = count_if(grp_ans, [member_count, &grp_ans](char x) {
     return count(grp_ans, x) == member_count;
   });
-  // Remove duplicates and don't count newlines
+  // Remove duplicates
   return (freq / member_count);
 }
 

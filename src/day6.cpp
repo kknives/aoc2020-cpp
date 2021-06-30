@@ -29,7 +29,7 @@ unique_answers(Answers& ans, const std::string_view grp_ans)
 }
 
 auto
-common_answers(AnsMap& ans, const std::string_view grp_ans) -> AnsMap::size_type
+common_answers(int member_count, const std::string_view grp_ans) -> int
 {
   using namespace ranges;
 
@@ -40,13 +40,20 @@ common_answers(AnsMap& ans, const std::string_view grp_ans) -> AnsMap::size_type
   return (freq / member_count);
 }
 
+struct Input
+{
+  int line_count;
+  std::string lines;
+};
+
 std::istream&
-operator>>(std::istream& is, std::string& op)
+operator>>(std::istream& is, Input& res)
 {
   std::string line;
-  while (std::getline(is, line) && !line.empty()) {
+  for (res.line_count = 0; std::getline(is, line) && !line.empty();
+       res.line_count++) {
     // Preserve newlines for separating groups into members
-    op.append(line + '\n');
+    res.lines.append(line);
   }
   return is;
 }
@@ -55,20 +62,18 @@ int
 main()
 {
   Answers unique{};
-  AnsMap common{};
   auto uniques = 0;
   auto commons = 0;
 
-  std::string grp_ans;
-  while (std::cin >> grp_ans) {
-    // fmt::print("dbg: parsed {}\n", grp_ans);
-    std::string_view group_answers_view{ grp_ans };
+  Input input{};
+
+  while (std::cin >> input) {
+    std::string_view group_answers_view{ input.lines };
     uniques += unique_answers(unique, group_answers_view);
-    commons += common_answers(common, group_answers_view);
+    commons += common_answers(input.line_count, group_answers_view);
 
     unique.clear();
-    common.clear();
-    grp_ans.clear();
+    input.lines.clear();
   }
   fmt::print("#Unique Answers = {}\n", uniques);
   fmt::print("#Common Answers = {}\n", commons);

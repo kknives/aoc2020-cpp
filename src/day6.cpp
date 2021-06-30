@@ -50,7 +50,6 @@ operator>>(std::istream& is, Input& res)
   std::string line;
   for (res.line_count = 0; std::getline(is, line) && !line.empty();
        res.line_count++) {
-    // Preserve newlines for separating groups into members
     res.lines.append(line);
   }
   return is;
